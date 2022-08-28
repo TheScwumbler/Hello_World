@@ -1,17 +1,19 @@
 #![allow(non_snake_case)] 
 
-fn test(s: &mut String) {
+macro_rules! TestMacro {
+    ( $( $x:expr ),* ) => {
+        println!("prints before other arguments\n");
 
-    *s = String::from("Hello World!");
+        $(
+            println!($x);
+        )*
 
+        println!("prints after other arguments\n");
+    };
 }
 
 fn main() {
-    // create String named s
-    // have to initialize to allow referencing
-    let mut s: String = String::new();
+    
+    TestMacro!("testing", "testing again", "");
 
-    test(&mut s); // set s to "Hello World!"
-
-    println!("{0}", s); // print s
 }
